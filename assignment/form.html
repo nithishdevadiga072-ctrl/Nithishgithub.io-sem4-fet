@@ -56,6 +56,11 @@
             color: green;
             font-size: 16px;
         }
+
+        #result {
+            margin-top: 15px;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +80,9 @@
     <button onclick="validateForm()">Submit</button>
 
     <p id="successMsg" class="success"></p>
+
+    <!-- Display submitted data -->
+    <div id="result" class="success"></div>
 </div>
 
 <script>
@@ -87,12 +95,14 @@ function validateForm() {
     let phoneError = document.getElementById("phoneError");
     let emailError = document.getElementById("emailError");
     let successMsg = document.getElementById("successMsg");
+    let result = document.getElementById("result");
 
     // Reset messages
     nameError.innerText = "";
     phoneError.innerText = "";
     emailError.innerText = "";
     successMsg.innerText = "";
+    result.innerHTML = "";
 
     let isValid = true;
 
@@ -102,7 +112,7 @@ function validateForm() {
         isValid = false;
     }
 
-    // Phone validation (10 digits)
+    // Phone validation
     let phonePattern = /^[0-9]{10}$/;
     if (!phonePattern.test(phone)) {
         phoneError.innerText = "Enter valid 10-digit phone number";
@@ -116,9 +126,16 @@ function validateForm() {
         isValid = false;
     }
 
-    // Success
+    // If valid, display submitted data
     if (isValid) {
         successMsg.innerText = "Form submitted successfully!";
+
+        result.innerHTML = `
+            <h3>Submitted Details:</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Email:</strong> ${email}</p>
+        `;
     }
 }
 </script>
