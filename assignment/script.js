@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container">{
         <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
         
         <h1 id="name">Hello, I'm Nithish Devadiga</h1>
@@ -8,7 +8,7 @@
 
         <button onclick="showMessage()">Click to Know More</button>
 
-        <p id="extra-info"></p>
+        <p id="extra-info"></p> }
     function showMessage() {
     // Ask user name
     let name = prompt("What is your name?");
