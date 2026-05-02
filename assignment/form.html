@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            margin: 0;
+            padding: 0;
+        }
 
+        .form-container {
+            width: 350px;
+            background: white;
+            margin: 80px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #2193b0;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #17687a;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .success {
+            color: green;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Application Form</h2>
+
+    <input type="text" id="name" placeholder="Enter your name">
+    <div id="nameError" class="error"></div>
+
+    <input type="text" id="phone" placeholder="Enter your phone number">
+    <div id="phoneError" class="error"></div>
+
+    <input type="text" id="email" placeholder="Enter your email">
+    <div id="emailError" class="error"></div>
+
+    <button onclick="validateForm()">Submit</button>
+
+    <p id="successMsg" class="success"></p>
+</div>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let email = document.getElementById("email").value.trim();
+
+    let nameError = document.getElementById("nameError");
+    let phoneError = document.getElementById("phoneError");
+    let emailError = document.getElementById("emailError");
+    let successMsg = document.getElementById("successMsg");
+
+    // Reset messages
+    nameError.innerText = "";
+    phoneError.innerText = "";
+    emailError.innerText = "";
+    successMsg.innerText = "";
+
+    let isValid = true;
+
+    // Name validation
+    if (name === "") {
+        nameError.innerText = "Name is required";
+        isValid = false;
+    }
+
+    // Phone validation (10 digits)
+    let phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phone)) {
+        phoneError.innerText = "Enter valid 10-digit phone number";
+        isValid = false;
+    }
+
+    // Email validation
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailPattern.test(email)) {
+        emailError.innerText = "Enter valid email address";
+        isValid = false;
+    }
+
+    // Success
+    if (isValid) {
+        successMsg.innerText = "Form submitted successfully!";
+    }
+}
+</script>
+
+</body>
+</html>
