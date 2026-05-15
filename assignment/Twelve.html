@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lists</title>
+    <link rel="stylesheet" href="two.css">
+  </head>
+<body>
+  <h2>Technical Skills</h2>
+  <ol>
+    <li>Programming Languages
+    <ul>
+      <li>C</li>
+      <li>C++</li>
+      <li>Java</li>
+      <li>Python</li>
+    <ul>
+  </li>
+      <li>Database
+        <ul>
+          <li>My SQL</li>
+          <li>Oracle</li>
+        </ul>
+    </li>
+      <li>Styling and Frameworks
+                <ul>
+                    <li>Bootstrap</li>
+                    <li>Tailwind CSS</li>
+                </ul>
+      </li>
+      <li>Tools
+      <ul>
+        <li>Git</li>
+        <li>VS Code</li>
+        <li>Eclipse</li>
+      </ul>
+      </li>
+  </ol>
+<style>
+</body>
+  </html>
+      body {
+    background: rgb(25,50,50);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+button {
+    padding: 8px 15px;
+    margin: 10px 5px;
+    background: #4CAF50;
+    color: blue;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+/* Center list but keep text left */
+ol {
+    display: table;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Add spacing for items */
+li {
+    margin: 5px 0;
+}
+  </style>
+      <script>
+        function addCategory() {
+    const name = prompt("Enter category:");
+    if (!name) return;
+
+    const ol = document.querySelector("ol");
+
+    const li = document.createElement("li");
+    li.innerHTML = "<strong>" + name + "</strong>";
+
+    const ul = document.createElement("ul");
+    li.appendChild(ul);
+
+    ol.appendChild(li);
+}
+
+function addSkill() {
+    const num = prompt("Enter category number (1,2,..):");
+    const skill = prompt("Enter skill:");
+    if (!num || !skill) return;
+
+    const categories = document.querySelectorAll("ol > li");
+
+    if (categories[num - 1]) {
+        const ul = categories[num - 1].querySelector("ul");
+
+        const li = document.createElement("li");
+        li.textContent = skill;
+
+        ul.appendChild(li);
+    } else {
+        alert("Invalid category number");
+    }
+        }
+      </script>
+      
+  
