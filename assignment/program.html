@@ -110,57 +110,55 @@
 
  </style>
 
- <script>
+<script>
 
- function saveData(event) {
+let balance = 5000;
 
- event.preventDefault();
+let option = prompt(
+  "Choose an option:\n" +
+  "1. Withdraw\n" +
+  "2. Deposit\n" +
+  "3. Check Balance"
+);
 
- let name = document.getElementById("name").value;
+if (option == "1") {
 
- let email = document.getElementById("email").value;
+    let withdraw = Number(prompt("Enter withdraw amount:"));
 
- let dob = document.getElementById("dob").value; // ✅ DOB added
+    if (withdraw <= balance) {
+        balance = balance - withdraw;
+        alert("Withdrawal Successful");
+        alert("Remaining Balance = ₹" + balance);
+    } else {
+        alert("Insufficient Balance");
+    }
 
- let gender = document.querySelector('input[name="gender"]:checked');
+} 
+else if (option == "2") {
 
- gender = gender ? gender.value : "Not selected";
+    let deposit = Number(prompt("Enter deposit amount:"));
 
- let skills = document.getElementsByName("skills");
+    balance = balance + deposit;
 
- let selectedSkills = "";
+    alert("Deposit Successful");
+    alert("Updated Balance = ₹" + balance);
 
- for (let i = 0; i < skills.length; i++) {
+} 
+else if (option == "3") {
 
-  if (skills[i].checked) {
+    alert("Your Balance = ₹" + balance);
 
- selectedSkills += skills[i].value + ", ";
+} 
+else {
 
- }
+    alert("Invalid Option");
 
- }
+}
 
- if (selectedSkills === "") {
+</script>
 
- selectedSkills = "None";
-
- }
-
- document.getElementById("output").innerHTML =
-
- "<h3>Submitted Details</h3>" +
-
- "Name: " + name + "<br>" +
-
- "Email: " + email + "<br>" +
-
- "DOB: " + dob + "<br>" + // ✅ show DOB
-
- "Gender: " + gender + "<br>" +
-
- "Skills: " + selectedSkills;
-
- }
+</body>
+</html>
 
  </script>
 
@@ -168,45 +166,21 @@
 
 <body>
 
-<h2>Hire Me</h2>
+<h2>ATM MACHINE</h2>
 
 <form onsubmit="saveData(event)">
 
- <label>Full Name:</label>
+ <label>Deposit:</label>
 
- <input type="text" id="name" required>
+ <input type="money" id="Deposit" required>
 
- <label>Email:</label>
+ <label>Withdraw:</label>
 
- <input type="email" id="email" required>
+ <input type="money" id="Withdraw" required>
 
- <label>Date of Birth:</label>
+ <label>Check Balance:</label>
 
- <input type="date" id="dob" required>
-
- <fieldset>
-
- <legend>Gender</legend>
-
- <input type="radio" name="gender" value="Male"> Male <br>
-
- <input type="radio" name="gender" value="Female"> Female <br>
-
- <input type="radio" name="gender" value="Other"> Other
-
- </fieldset>
-
- <fieldset>
-
- <legend>Skills</legend>
-
- <input type="checkbox" name="skills" value="HTML"> HTML <br>
-
- <input type="checkbox" name="skills" value="CSS"> CSS <br>
-
- <input type="checkbox" name="skills" value="JavaScript"> JavaScript
-
- </fieldset>
+ <input type="money" id="Check balance" required>
 
  <button type="submit">Submit</button>
 
