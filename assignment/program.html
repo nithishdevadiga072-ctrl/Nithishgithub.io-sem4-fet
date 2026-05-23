@@ -1,157 +1,170 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- <title>ATM MACHINE</title>
+<title>ATM MACHINE</title>
 
- <style>
+<style>
 
- body {
+body{
+    font-family: Arial, sans-serif;
+    background: #f0f4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
- font-family: Arial;
+.container{
+    width: 350px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
 
- background-color: #f0f4ff;
+h2{
+    text-align: center;
+    color: #2563eb;
+}
 
- }
+label{
+    font-weight: bold;
+}
 
- h2 {
+select,
+input{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #93c5fd;
+    border-radius: 5px;
+}
 
- text-align: center;
+button{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
- color: #1e3a8a;
+button:hover{
+    background: #1d4ed8;
+}
 
- }
+#output{
+    margin-top: 15px;
+    padding: 10px;
+    background: #eff6ff;
+    border-left: 5px solid #2563eb;
+    border-radius: 5px;
+    font-weight: bold;
+}
 
- form {
+</style>
+</head>
 
- width: 320px;
+<body>
 
- margin: auto;
+<div class="container">
 
- background: #ffffff;
+    <h2>ATM MACHINE</h2>
 
- padding: 15px;
+    <!-- PIN CODE -->
+    <label>Enter PIN Code</label>
+    <input type="password" id="pin" placeholder="Enter 4-digit PIN">
 
- border-radius: 8px;
+    <!-- OPTION -->
+    <label>Select Option</label>
 
- border: 1px solid #c7d2fe;
+    <select id="option">
+        <option value="">--Choose--</option>
+        <option value="withdraw">Withdraw</option>
+        <option value="deposit">Deposit</option>
+    </select>
 
- }
+    <!-- AMOUNT -->
+    <label>Enter Amount</label>
+    <input type="number" id="amount" placeholder="Enter amount">
 
- input, select, textarea {
+    <!-- BUTTON -->
+    <button onclick="atmMachine()">Submit</button>
 
- width: 100%;
+    <!-- OUTPUT -->
+    <div id="output"></div>
 
- margin: 6px 0;
-
-  padding: 7px;
-
- border: 1px solid #93c5fd;
-
- border-radius: 4px;
-
- }
-
- fieldset {
-
- margin-top: 10px;
-
- border: 1px solid #93c5fd;
-
- border-radius: 5px;
-
- padding: 10px;
-
- }
-
- legend {
-
- color: #2563eb;
-
- font-weight: bold;
-
- }
-
- button {
-
- width: 100%;
-
- padding: 8px;
-
- margin-top: 10px;
-
- border: none;
-
- color: white;
-
- cursor: pointer;
-
- background-color: #2563eb;
-
- }
-
-  #output {
-
- width: 320px;
-
- margin: 15px auto;
-
- background: #ffffff;
-
- padding: 10px;
-
- border-radius: 8px;
-
- border-left: 5px solid #2563eb;
-
- }
-
- </style>
+</div>
 
 <script>
 
 let balance = 5000;
+let correctPin = "1234";
 
-let option = prompt(
-  "Choose an option:\n" +
-  "1. Withdraw\n" +
-  "2. Deposit\n" +
-  "3. Check Balance"
-);
+function atmMachine(){
 
-if (option == "1") {
+    let pin = document.getElementById("pin").value;
+    let option = document.getElementById("option").value;
+    let amount = Number(document.getElementById("amount").value);
+    let output = document.getElementById("output");
 
-    let withdraw = Number(prompt("Enter withdraw amount:"));
+    // CHECK PIN
+    if(pin !== correctPin){
 
-    if (withdraw <= balance) {
-        balance = balance - withdraw;
-        alert("Withdrawal Successful");
-        alert("Remaining Balance = ₹" + balance);
-    } else {
-        alert("Insufficient Balance");
+        output.innerHTML = "Incorrect PIN Code";
+        return;
+
     }
 
-} 
-else if (option == "2") {
+    // WITHDRAW
+    if(option === "withdraw"){
 
-    let deposit = Number(prompt("Enter deposit amount:"));
+        if(amount <= balance && amount > 0){
 
-    balance = balance + deposit;
+            balance = balance - amount;
 
-    alert("Deposit Successful");
-    alert("Updated Balance = ₹" + balance);
+            output.innerHTML =
+            "Withdrawal Successful <br> Remaining Balance = ₹" + balance;
 
-} 
-else if (option == "3") {
+        }else{
 
-    alert("Your Balance = ₹" + balance);
+            output.innerHTML = "Insufficient Balance";
 
-} 
-else {
+        }
 
-    alert("Invalid Option");
+    }
+
+    // DEPOSIT
+    else if(option === "deposit"){
+
+        if(amount > 0){
+
+            balance = balance + amount;
+
+            output.innerHTML =
+            "Deposit Successful <br> Updated Balance = ₹" + balance;
+
+        }else{
+
+            output.innerHTML = "Enter valid amount";
+
+        }
+
+    }
+
+
+    // INVALID OPTION
+    else{
+
+        output.innerHTML = "Please select an option";
+
+    }
 
 }
 
@@ -159,36 +172,3 @@ else {
 
 </body>
 </html>
-
- </script>
-
-</head>
-
-<body>
-
-<h2>ATM MACHINE</h2>
-
-<form onsubmit="saveData(event)">
-
- <label>Deposit:</label>
-
- <input type="money" id="Deposit" required>
-
- <label>Withdraw:</label>
-
- <input type="money" id="Withdraw" required>
-
- <label>Check Balance:</label>
-
- <input type="money" id="Check balance" required>
-
- <button type="submit">Submit</button>
-
-</form>
-
-<div id="output"></div>
-
-</body>
-
-</html>
-
