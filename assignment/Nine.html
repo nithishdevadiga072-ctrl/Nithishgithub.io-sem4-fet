@@ -4,7 +4,7 @@
 
 <head>
 
- <title>Simple Dropdown & ListBox</title>
+ <title>Hire Me Contact Form</title>
 
  <style>
 
@@ -12,177 +12,207 @@
 
  font-family: Arial;
 
- background: #f2f2f2;
-
- display: flex;
-
- justify-content: center;
-
- align-items: center;
-
- height: 100vh;
-
- }
-
- .box {
-
- background: white;
-
- padding: 25px;
-
- border-radius: 10px;
-
- width: 300px;
-
- text-align: center;
-
- box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+ background-color: #f0f4ff;
 
  }
 
  h2 {
 
- margin-bottom: 15px;
-   
-   color: #333;
+ text-align: center;
+
+ color: #1e3a8a;
 
  }
 
- select, button {
+ form {
+
+ width: 320px;
+
+ margin: auto;
+
+ background: #ffffff;
+
+ padding: 15px;
+
+ border-radius: 8px;
+
+ border: 1px solid #c7d2fe;
+
+ }
+
+ input, select, textarea {
 
  width: 100%;
 
- padding: 8px;
+ margin: 6px 0;
 
- margin: 8px 0;
+  padding: 7px;
 
- border-radius: 5px;
+ border: 1px solid #93c5fd;
 
- border: 1px solid #ccc;
+ border-radius: 4px;
 
  }
 
- select:focus {
+ fieldset {
 
- border-color: #4CAF50;
+ margin-top: 10px;
 
- outline: none;
+ border: 1px solid #93c5fd;
+
+ border-radius: 5px;
+
+ padding: 10px;
+
+ }
+
+ legend {
+
+ color: #2563eb;
+
+ font-weight: bold;
 
  }
 
  button {
 
- background: #4CAF50;
+ width: 100%;
+
+ padding: 8px;
+
+ margin-top: 10px;
+
+ border: none;
 
  color: white;
 
  cursor: pointer;
 
- border: none;
+ background-color: #2563eb;
 
  }
 
- button:hover {
+  #output {
 
- background: #45a049;
+ width: 320px;
 
- }
+ margin: 15px auto;
 
- #result {
+ background: #ffffff;
 
- margin-top: 10px;
+ padding: 10px;
 
-   font-weight: bold;
+ border-radius: 8px;
 
- color: #444;
+ border-left: 5px solid #2563eb;
 
  }
 
  </style>
 
+ <script>
+
+ function saveData(event) {
+
+ event.preventDefault();
+
+ let name = document.getElementById("name").value;
+
+ let email = document.getElementById("email").value;
+
+ let dob = document.getElementById("dob").value; // ✅ DOB added
+
+ let gender = document.querySelector('input[name="gender"]:checked');
+
+ gender = gender ? gender.value : "Not selected";
+
+ let skills = document.getElementsByName("skills");
+
+ let selectedSkills = "";
+
+ for (let i = 0; i < skills.length; i++) {
+
+  if (skills[i].checked) {
+
+ selectedSkills += skills[i].value + ", ";
+
+ }
+
+ }
+
+ if (selectedSkills === "") {
+
+ selectedSkills = "None";
+
+ }
+
+ document.getElementById("output").innerHTML =
+
+ "<h3>Submitted Details</h3>" +
+
+ "Name: " + name + "<br>" +
+
+ "Email: " + email + "<br>" +
+
+ "DOB: " + dob + "<br>" + // ✅ show DOB
+
+ "Gender: " + gender + "<br>" +
+
+ "Skills: " + selectedSkills;
+
+ }
+
+ </script>
+
 </head>
 
 <body>
 
-<div class="box">
+<h2>Hire Me</h2>
 
-<h2>Course Selection</h2>
+<form onsubmit="saveData(event)">
 
-<select id="course" onchange="updateList()">
+ <label>Full Name:</label>
 
- <option value="">Select Course</option>
+ <input type="text" id="name" required>
 
- <option value="web">Web</option>
+ <label>Email:</label>
 
- <option value="prog">Programming</option>
+ <input type="email" id="email" required>
 
-</select>
+ <label>Date of Birth:</label>
 
-<select id="listbox" multiple size="4"></select>
+ <input type="date" id="dob" required>
 
-<button id="btn">Show Selected</button>
+ <fieldset>
 
-<p id="result"></p>
+ <legend>Gender</legend>
 
-</div>
+ <input type="radio" name="gender" value="Male"> Male <br>
 
-<script>
+ <input type="radio" name="gender" value="Female"> Female <br>
 
- const data = {
+ <input type="radio" name="gender" value="Other"> Other
 
- web: ["HTML", "CSS", "JS"],
+ </fieldset>
 
- prog: ["C", "Java", "Python"]
+ <fieldset>
 
-   };
+ <legend>Skills</legend>
 
- function updateList() {
+ <input type="checkbox" name="skills" value="HTML"> HTML <br>
 
- let course = document.getElementById("course").value;
+ <input type="checkbox" name="skills" value="CSS"> CSS <br>
 
- let list = document.getElementById("listbox");
+ <input type="checkbox" name="skills" value="JavaScript"> JavaScript
 
- list.innerHTML = "";
+ </fieldset>
 
- if (data[course]) {
+ <button type="submit">Submit</button>
 
- data[course].forEach(function(item) {
+</form>
 
- let option = document.createElement("option");
-
- option.text = item;
-
- list.add(option);
-
- });
-
- }
-
- }
-
- document.getElementById("btn").addEventListener("click", function() {
-
- let list = document.getElementById("listbox");
-
- let selected = [];
-
- for (let i = 0; i < list.options.length; i++) {
-
- if (list.options[i].selected) {
-
- selected.push(list.options[i].text);
-
- }
-
- }
-
- document.getElementById("result").innerText =
-
-   "Selected: " + selected.join(", ");
-
- });
-
-</script>
+<div id="output"></div>
 
 </body>
 
