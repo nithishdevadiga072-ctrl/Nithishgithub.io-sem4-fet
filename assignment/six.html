@@ -1,39 +1,76 @@
-<!DOCTYPE html>
 <html>
-<style>
-table, th, td {
-  border:1px solid black;
-}
-</style>
+<head>
+    <title>Lists</title>
+</head>
 <body>
-
-<h2>A basic HTML table</h2>
-
-<table style="width:100%">
-  <tr>
-    <th>student name</th>
-    <th>USN</th>
-    <th>CGPA</th>
-  </tr>
-  <tr>
-    <td>Nithish</td>
-    <td>4MT24CS118</td>
-    <td>6.2</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezum</td>
-    <td>Francisco Chan</td>
-    <td>Mexic</td>
-  </tr>
-</table>
-
-<p>To understand the example better, we have added borders to the table.</p>
-
+    <h2>Technical Skills</h2>
+    <ol>
+        <li>Programming Languages
+            <ul>
+                <li>C</li>
+                <li>C++</li>
+                <li>Java</li>
+                <li>Python</li>
+            </ul>
+        </li>
+        <li>Database
+            <ul>
+                <li>MySQL</li>
+                <li>Oracle</li>
+            </ul>
+        </li>
+        <li>Tools
+            <ul>
+                <li>Git</li>
+                <li>VS Code</li>
+                <li>Eclipse</li>
+            </ul>
+        </li>
+    </ol>
 </body>
 </html>
+
+<style>
+body {
+    height: 90%;
+    margin: 0;
+    background: linear-gradient(to bottom, #243329, rgb(2, 3, 3));
+    color: white;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(89, 74, 74, 0.537);
+    padding: 30px;
+    border-radius: 20px;
+    width: fit-content;
+    margin: auto;
+    margin-top: 50px;
+}
+
+#gitlink {
+    padding: 15px;
+    background: rgb(255, 247, 247);
+    border-radius: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+#gitlink:hover {
+    background: rgb(139, 131, 131);
+}
+
+#center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#middle {
+    margin-top: 20px;
+}
+</style>
 
